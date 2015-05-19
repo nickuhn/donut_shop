@@ -1,7 +1,6 @@
 (function(){
   //declare all the variables and the column headers.
   var downtown, capitolHill, southLakeUnion, wedgewood, ballard;
-  var tableValues = [' ', '8:00 am', '9:00 am', '10:00 am', '11:00 am', '12:00 pm', '1:00 pm', '2:00 pm', '3:00 pm', '4:00 pm', '5:00 pm', '6:00 pm', 'Total']
 
   //Shop object constructor with prototype methods for determining a random
   //customer per hour count, and based on that the donuts needed per hour and
@@ -55,11 +54,22 @@
     table.appendChild(row);
   }
 
-  //Initializes the table. An array of column headers is passed in and then
-  //iterated over to build a row of <th> elements
-  tableInit = function() {
-    var tableHead  = document.getElementById('table-head');
-    var row        = document.createElement('tr');
+  //Initializes the table given and open and closing time in military time.
+  //Creates and array and converts to nonmilitary time.
+  tableInit = function(open, close) {
+    var tableValues = [];
+    var tableHead   = document.getElementById('table-head');
+    var row         = document.createElement('tr');
+    for(var j = 0; j < close - open; j++) {
+      var time = (j + open + 1);
+      if (time <= 12){
+        tableValues[j] = time + ':00am ';
+      } else {
+        tableValues[j] = (time - 12) + ':00pm';
+      }
+    }
+    tableValues.unshift(' ');
+    tableValues.push('Total');
     for (var i = 0; i < tableValues.length; i++) {
       var cell     = document.createElement('th');
       var cellText = document.createTextNode(tableValues[i]);
@@ -72,7 +82,7 @@
   //Initialize the table and instantiates 5 shop locations. The daily method is
   //called to create the estimates and then the renders is called to print them
   //to the table on the index.html page.
-  tableInit();
+  tableInit(7, 18);
 
   downtown       = new Shop(8, 43, 4.50);
   downtown.custPerHour(downtown.minCustPerHour, downtown.maxCustPerHour);
