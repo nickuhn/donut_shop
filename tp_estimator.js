@@ -1,21 +1,22 @@
 (function(){
   //declare all the variables and the column headers.
-  var downtown, capitolHill, southLakeUnion, wedgewood, ballard, open, close, submitButton;
+  var downtown, capitolhill, southlakeunion, wedgewood, ballard, open, close, submitButton, locationList;
   open  = 7;
   close = 18;
   //Shop object constructor with prototype methods for determining a random
   //customer per hour count, and based on that the donuts needed per hour and
   //per day. The results of these methods are then used in the render and
   //tableInit function to write a table to the index.html page dynamically.
-  function Shop(minCustHour, maxCustHour, donutPerCust){
+  function Shop(minCustHour, maxCustHour, donutPerCust, locationName){
     this.minCustPerHour  = minCustHour;
     this.maxCustPerHour  = maxCustHour;
     this.avgDonutPerCust = donutPerCust;
+    this.locationName    = locationName;
     this.byHour          = [];
   }
 
-  Shop.prototype.custPerHour = function(min,max){
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  Shop.prototype.custPerHour = function(){
+    return Math.floor(Math.random() * (this.maxCustPerHour - this.minCustPerHour + 1)) + this.minCustPerHour;
   }
 
   Shop.prototype.hourlyDonuts = function() {
@@ -34,14 +35,15 @@
     }
     this.byHour[0] = total;
   }
+
   //Creates a row on the table for each object call. The first element is the
   //location name in a <th> element tag. The rest are iterated over and stored
   //in <td> elements. The row is then appended to the table.
-  Shop.prototype.render = function(name) {
+  Shop.prototype.render = function() {
     var table    = document.getElementById('table-body');
     var row      = document.createElement('tr');
     var cell     = document.createElement('th');
-    var cellText = document.createTextNode(name);
+    var cellText = document.createTextNode(this.locationName);
     cell.appendChild(cellText);
     row.appendChild(cell);
     for (var i = this.byHour.length - 1; i >= 0; i--) {
@@ -56,9 +58,12 @@
   //Initializes the table given and open and closing time in military time.
   //Creates and array and converts to nonmilitary time.
   tableInit = function(open, close) {
-    var tableValues = [];
-    var tableHead   = document.getElementById('table-head');
-    var row         = document.createElement('tr');
+    var tableValues       = [];
+    var table             = document.getElementById('table-body');
+    var tableHead         = document.getElementById('table-head');
+    tableHead.textContent = "";
+    table.textContent     = "";
+    var row               = document.createElement('tr');
     for(var j = 0; j < close - open; j++) {
       var time = (j + open + 1);
       if (time <= 12){
@@ -78,51 +83,48 @@
     tableHead.appendChild(row);
   }
 
-  //Initialize the table and instantiates 5 shop locations. The daily method is
-  //called to create the estimates and then the renders is called to print them
-  //to the table on the index.html page.
-  tableInit(open, close);
+  var tableBuilder = function(open, close){
+    tableInit(open, close);
+    for(i = 0; i < locationList.length; i++){
+      locationList[i].dailyDonuts(open, close);
+      locationList[i].render();
+    }
+  }
 
-  downtown       = new Shop(8, 43, 4.50);
-  downtown.custPerHour(downtown.minCustPerHour, downtown.maxCustPerHour);
-  downtown.dailyDonuts(open, close);
-  downtown.render("Downtown");
+  //Event listener and functions to add a new store object, and to change the open
+  //and close times building a new table.
 
-  capitolHill    = new Shop(4, 37, 2.00);
-  capitolHill.custPerHour(capitolHill.minCustPerHour, capitolHill.maxCustPerHour);
-  capitolHill.dailyDonuts(open, close);
-  capitolHill.render("Capitol Hill");
+  var getHours = function() {
+    open = parseInt(document.getElementById('open').value);
+    close = parseInt(document.getElementById('close').value);
+    tableBuilder(open, close);
+  }
 
-  southLakeUnion = new Shop(9, 23, 6.33);
-  southLakeUnion.custPerHour(southLakeUnion.minCustPerHour, southLakeUnion.maxCustPerHour);
-  southLakeUnion.dailyDonuts(open, close);
-  southLakeUnion.render("South Lake Union");
-
-  wedgewood      = new Shop(2, 28, 1.25);
-  wedgewood.custPerHour(wedgewood.minCustPerHour, wedgewood.maxCustPerHour);
-  wedgewood.dailyDonuts(open, close);
-  wedgewood.render("Wedgewood");
-
-  ballard        = new Shop(8, 58, 3.75);
-  ballard.custPerHour(ballard.minCustPerHour, ballard.maxCustPerHour);
-  ballard.dailyDonuts(open, close);
-  ballard.render("Ballard");
-
-
-  var createRow = function() {
+  var createNew = function() {
     var locationFull = document.getElementById('location').value;
     var minCustPerHour = parseInt(document.getElementById('min-cust-hour').value);
     var maxCustPerHour = parseInt(document.getElementById('max-cust-hour').value);
     var donutPerCust = parseInt(document.getElementById('donut-cust').value);
-    var location = new Shop(minCustPerHour, maxCustPerHour, donutPerCust);
-    location.custPerHour(location.minCustPerHour, location.maxCustPerHour);
-    location.dailyDonuts(open, close);
-    location.render(locationFull);
+    var location = new Shop(minCustPerHour, maxCustPerHour, donutPerCust, locationFull);
+    locationList.unshift(location);
+    locationList[0].dailyDonuts(open, close);
+    locationList[0].render();
   }
+  hoursButton = document.getElementById('submit-hours');
+  hoursButton.addEventListener('click', getHours, false);
 
-  submitButton = document.getElementById('submit-new-store');
-  submitButton.addEventListener('click', createRow, false);
+  newStoreButton = document.getElementById('submit-new-store');
+  newStoreButton.addEventListener('click', createNew, false);
 
+  //Initialize the table and instantiates 5 shop locations.
+  locationList = [];
+  locationList.push(new Shop(8, 43, 4.50, "Downtown"));
+  locationList.push(new Shop(4, 37, 2.00, "Capitol Hill"));
+  locationList.push(new Shop(9, 23, 6.33, "South Lake Union"));
+  locationList.push(new Shop(2, 28, 1.25, "Wedgewood"));
+  locationList.push(new Shop(8, 58, 3.75, "Ballard"));
+
+  tableBuilder(open, close);
 
 })();
 

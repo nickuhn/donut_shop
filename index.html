@@ -12,25 +12,36 @@
     </header>
     <main>
       <article>
+        <h2>Donuts Needed for Each Hour</h2>
         <table id="main-table">
           <thead id="table-head">
           </thead>
           <tbody id="table-body">
           </tbody>
         </table>
+        <form>
+          <label for="location-time">Which location are you?</label>
+          <input id="location-time" type="text">
+          <label for="open">What time do you open?</label>
+          <input id="open" type="number">
+          <label for="close">What time do you close?</label>
+          <input id="close" type="number">
+          <button type="button" id="submit-hours">Submit</button>
+        </form>
         <p>Tired of running out of donuts in the middle of a rush? Even worse having too many left at the end of the day?</p>
         <p>This handy estimator will help to minimize those losses and make you business even more profitable!<p>
       </article>
       <article>
+        <h2>Add a New Store</h2>
         <form>
           <label for="min-cust-hour">Enter your minimum customers per hour:</label>
-          <input id="min-cust-hour" type="number">
+          <input id="min-cust-hour" type="number"><br>
           <label for="max-cust-hour">Enter your maximum customers per hour:</label>
-          <input id="max-cust-hour" type="number">
+          <input id="max-cust-hour" type="number"><br>
           <label for="donut-cust">Enter the average number of donuts each customer buys:</label>
-          <input id="donut-cust" type="number">
+          <input id="donut-cust" type="number"><br>
           <label for="location">Where are you located?</label>
-          <input id="location" type="text">
+          <input id="location" type="text"><br>
           <button type="button" id="submit-new-store">Submit</button>
         </form>
       </article>
