@@ -1,8 +1,8 @@
 (function(){
   //declare all the variables and the column headers.
-  var downtown, capitolHill, southLakeUnion, wedgewood, ballard;
-  var open  = 7;
-  var close = 18;
+  var downtown, capitolHill, southLakeUnion, wedgewood, ballard, open, close, submitButton;
+  open  = 7;
+  close = 18;
   //Shop object constructor with prototype methods for determining a random
   //customer per hour count, and based on that the donuts needed per hour and
   //per day. The results of these methods are then used in the render and
@@ -27,12 +27,10 @@
   //Open and close times need to be in military time rounded to nearest hour.
   Shop.prototype.dailyDonuts = function(open, close) {
     var total     = 0;
-    var hourly    = 0;
     var hoursOpen = close - open;
     for (var i = hoursOpen; i > 0; i--) {
-      hourly          = this.hourlyDonuts();
-      this.byHour[i]  = hourly;
-      total          += hourly;
+      this.byHour[i]  = this.hourlyDonuts();
+      total          += this.byHour[i];
     }
     this.byHour[0] = total;
   }
@@ -109,4 +107,22 @@
   ballard.custPerHour(ballard.minCustPerHour, ballard.maxCustPerHour);
   ballard.dailyDonuts(open, close);
   ballard.render("Ballard");
+
+
+  var createRow = function() {
+    var locationFull = document.getElementById('location').value;
+    var minCustPerHour = parseInt(document.getElementById('min-cust-hour').value);
+    var maxCustPerHour = parseInt(document.getElementById('max-cust-hour').value);
+    var donutPerCust = parseInt(document.getElementById('donut-cust').value);
+    var location = new Shop(minCustPerHour, maxCustPerHour, donutPerCust);
+    location.custPerHour(location.minCustPerHour, location.maxCustPerHour);
+    location.dailyDonuts(open, close);
+    location.render(locationFull);
+  }
+
+  submitButton = document.getElementById('submit-new-store');
+  submitButton.addEventListener('click', createRow, false);
+
+
 })();
+

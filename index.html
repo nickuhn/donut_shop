@@ -1,9 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title>Donut Demand Estimator</title>
-    <meta name="description" content="Guessing, Game, Age">
+    <meta name="description" content="Calculator, Donut, Estimator, Per Hour Table">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
@@ -11,14 +11,29 @@
       <h1>Hourly Donut Demand Estimator</h1>
     </header>
     <main>
-      <table id="main-table">
-        <thead id="table-head">
-        </thead>
-        <tbody id="table-body">
-        </tbody>
-      </table>
-      <p>Tired of running out of donuts in the middle of a rush? Even worse having too many left at the end of the day?</p>
-      <p>This handy estimator will help to minimize those losses and make you business even more profitable!<p>
+      <article>
+        <table id="main-table">
+          <thead id="table-head">
+          </thead>
+          <tbody id="table-body">
+          </tbody>
+        </table>
+        <p>Tired of running out of donuts in the middle of a rush? Even worse having too many left at the end of the day?</p>
+        <p>This handy estimator will help to minimize those losses and make you business even more profitable!<p>
+      </article>
+      <article>
+        <form>
+          <label for="min-cust-hour">Enter your minimum customers per hour:</label>
+          <input id="min-cust-hour" type="number">
+          <label for="max-cust-hour">Enter your maximum customers per hour:</label>
+          <input id="max-cust-hour" type="number">
+          <label for="donut-cust">Enter the average number of donuts each customer buys:</label>
+          <input id="donut-cust" type="number">
+          <label for="location">Where are you located?</label>
+          <input id="location" type="text">
+          <button type="button" id="submit-new-store">Submit</button>
+        </form>
+      </article>
     </main>
     <footer>
       <p>Created and Updated by: Nick Kuhn</p>
