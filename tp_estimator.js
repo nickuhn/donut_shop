@@ -1,7 +1,8 @@
 (function(){
   //declare all the variables and the column headers.
   var downtown, capitolHill, southLakeUnion, wedgewood, ballard;
-
+  var open  = 7;
+  var close = 18;
   //Shop object constructor with prototype methods for determining a random
   //customer per hour count, and based on that the donuts needed per hour and
   //per day. The results of these methods are then used in the render and
@@ -82,30 +83,30 @@
   //Initialize the table and instantiates 5 shop locations. The daily method is
   //called to create the estimates and then the renders is called to print them
   //to the table on the index.html page.
-  tableInit(7, 18);
+  tableInit(open, close);
 
   downtown       = new Shop(8, 43, 4.50);
   downtown.custPerHour(downtown.minCustPerHour, downtown.maxCustPerHour);
-  downtown.dailyDonuts(7, 18);
+  downtown.dailyDonuts(open, close);
   downtown.render("Downtown");
 
   capitolHill    = new Shop(4, 37, 2.00);
   capitolHill.custPerHour(capitolHill.minCustPerHour, capitolHill.maxCustPerHour);
-  capitolHill.dailyDonuts(7, 18);
+  capitolHill.dailyDonuts(open, close);
   capitolHill.render("Capitol Hill");
 
   southLakeUnion = new Shop(9, 23, 6.33);
   southLakeUnion.custPerHour(southLakeUnion.minCustPerHour, southLakeUnion.maxCustPerHour);
-  southLakeUnion.dailyDonuts(7, 18);
+  southLakeUnion.dailyDonuts(open, close);
   southLakeUnion.render("South Lake Union");
 
   wedgewood      = new Shop(2, 28, 1.25);
   wedgewood.custPerHour(wedgewood.minCustPerHour, wedgewood.maxCustPerHour);
-  wedgewood.dailyDonuts(7, 18);
+  wedgewood.dailyDonuts(open, close);
   wedgewood.render("Wedgewood");
 
   ballard        = new Shop(8, 58, 3.75);
   ballard.custPerHour(ballard.minCustPerHour, ballard.maxCustPerHour);
-  ballard.dailyDonuts(7, 18);
+  ballard.dailyDonuts(open, close);
   ballard.render("Ballard");
 })();
