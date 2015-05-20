@@ -14,11 +14,11 @@
     this.locationName    = locationName;
     this.byHour          = [];
   }
-
+  //Creates a random number of customers per hour between min and max
   Shop.prototype.custPerHour = function(){
     return Math.floor(Math.random() * (this.maxCustPerHour - this.minCustPerHour + 1)) + this.minCustPerHour;
   }
-
+  //calculate hourly donuts sold base on customers per hour and average sold per customer.
   Shop.prototype.hourlyDonuts = function() {
     return parseInt((this.avgDonutPerCust * this.custPerHour(this.minCustPerHour, this.maxCustPerHour)));
   }

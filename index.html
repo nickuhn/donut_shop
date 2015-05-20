@@ -11,6 +11,10 @@
       <h1>Hourly Donut Demand Estimator</h1>
     </header>
     <main>
+        <aside>
+          <p>Tired of running out of donuts in the middle of a rush? Even worse having too many left at the end of the day?</p>
+          <p>This handy estimator will help to minimize those losses and make you business even more profitable!</p>
+        </aside>
       <article>
         <h2>Donuts Needed for Each Hour</h2>
         <table id="main-table">
@@ -20,16 +24,14 @@
           </tbody>
         </table>
         <form>
-          <label for="location-time">Which location are you?</label>
-          <input id="location-time" type="text">
+          <h3>Input open and close times to update table.</h3>
+          <p>Military time please and just the hour. If it is after noon, add 12 to the current time to convert</p>
           <label for="open">What time do you open?</label>
           <input id="open" type="number">
           <label for="close">What time do you close?</label>
           <input id="close" type="number">
           <button type="button" id="submit-hours">Submit</button>
         </form>
-        <p>Tired of running out of donuts in the middle of a rush? Even worse having too many left at the end of the day?</p>
-        <p>This handy estimator will help to minimize those losses and make you business even more profitable!<p>
       </article>
       <article>
         <h2>Add a New Store</h2>
