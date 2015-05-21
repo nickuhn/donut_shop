@@ -1,6 +1,6 @@
 (function(){
   //declare all the variables and the column headers.
-  var downtown, capitolhill, southlakeunion, wedgewood, ballard, open, close, submitButton, locationList;
+  var open, close, locationList, newStoreButton, hoursButton, tableInit;
   open  = 7;
   close = 18;
   //Shop object constructor with prototype methods for determining a random
@@ -17,11 +17,11 @@
   //Creates a random number of customers per hour between min and max
   Shop.prototype.custPerHour = function(){
     return Math.floor(Math.random() * (this.maxCustPerHour - this.minCustPerHour + 1)) + this.minCustPerHour;
-  }
+  };
   //calculate hourly donuts sold base on customers per hour and average sold per customer.
   Shop.prototype.hourlyDonuts = function() {
     return parseInt((this.avgDonutPerCust * this.custPerHour(this.minCustPerHour, this.maxCustPerHour)));
-  }
+  };
   //Calculates the daily donuts needed by calling the hourly method for each hour
   //the store is open. It stores each of the hourly calls in an array for reference
   //in the render method. And then stores the total to the object.
@@ -34,7 +34,7 @@
       total          += this.byHour[i];
     }
     this.byHour[0] = total;
-  }
+  };
 
   //Creates a row on the table for each object call. The first element is the
   //location name in a <th> element tag. The rest are iterated over and stored
@@ -53,7 +53,7 @@
       row.appendChild(cell);
     }
     table.appendChild(row);
-  }
+  };
 
   //Initializes the table given and open and closing time in military time.
   //Creates and array and converts to nonmilitary time.
@@ -61,8 +61,8 @@
     var tableValues       = [];
     var table             = document.getElementById('table-body');
     var tableHead         = document.getElementById('table-head');
-    tableHead.textContent = "";
-    table.textContent     = "";
+    tableHead.textContent = '';
+    table.textContent     = '';
     var row               = document.createElement('tr');
     for(var j = 0; j < close - open; j++) {
       var time = (j + open + 1);
@@ -81,15 +81,15 @@
       row.appendChild(cell);
     }
     tableHead.appendChild(row);
-  }
+  };
 
   var tableBuilder = function(open, close){
     tableInit(open, close);
-    for(i = 0; i < locationList.length; i++){
+    for( var i = 0; i < locationList.length; i++){
       locationList[i].dailyDonuts(open, close);
       locationList[i].render();
     }
-  }
+  };
 
   //Event listener and functions to add a new store object, and to change the open
   //and close times building a new table.
@@ -98,7 +98,7 @@
     open = parseInt(document.getElementById('open').value);
     close = parseInt(document.getElementById('close').value);
     tableBuilder(open, close);
-  }
+  };
 
   var createNew = function() {
     var locationFull = document.getElementById('location').value;
@@ -109,7 +109,7 @@
     locationList.unshift(location);
     locationList[0].dailyDonuts(open, close);
     locationList[0].render();
-  }
+  };
   hoursButton = document.getElementById('submit-hours');
   hoursButton.addEventListener('click', getHours, false);
 
@@ -118,11 +118,11 @@
 
   //Initialize the table and instantiates 5 shop locations.
   locationList = [];
-  locationList.push(new Shop(8, 43, 4.50, "Downtown"));
-  locationList.push(new Shop(4, 37, 2.00, "Capitol Hill"));
-  locationList.push(new Shop(9, 23, 6.33, "South Lake Union"));
-  locationList.push(new Shop(2, 28, 1.25, "Wedgewood"));
-  locationList.push(new Shop(8, 58, 3.75, "Ballard"));
+  locationList.push(new Shop(8, 43, 4.50, 'Downtown'));
+  locationList.push(new Shop(4, 37, 2.00, 'Capitol Hill'));
+  locationList.push(new Shop(9, 23, 6.33, 'South Lake Union'));
+  locationList.push(new Shop(2, 28, 1.25, 'Wedgewood'));
+  locationList.push(new Shop(8, 58, 3.75, 'Ballard'));
 
   tableBuilder(open, close);
 
