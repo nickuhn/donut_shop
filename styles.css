@@ -129,3 +129,39 @@ footer {
   position: absolute;
   bottom: 0;
 }
+
+
+
+@media screen and (max-width:865px) {
+
+  header form input {
+    display:inline-block;
+  }
+  header{
+    position: relative;
+    width: auto;
+  }
+  .table {
+    position: relative;
+    clear:both;
+  }
+  main form {
+    width: 45%;
+    position: absolute;
+  }
+  main form label, main form input {
+    display: block;
+  }
+  main form button {
+    display:block;
+    margin: auto;
+  }
+  aside {
+    position: relative;
+    float: right;
+    width: 45%
+  }
+  footer{
+    display:none;
+  }
+}
