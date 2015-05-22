@@ -138,27 +138,30 @@ footer {
     display:inline-block;
   }
   header{
-    position: relative;
+    position: static;
     width: auto;
   }
   .table {
-    position: relative;
+    position: static;
     clear:both;
+    display:inline-block;
   }
   main form {
     width: 45%;
-    position: absolute;
+    position: static;
+    display: inline-block;
   }
   main form label, main form input {
-    display: block;
+    display: inline-block;
   }
   main form button {
-    display:block;
+    display: block;
     margin: auto;
   }
   aside {
-    position: relative;
-    float: right;
+    position: static;
+    clear: both;
+    display:inline-block;
     width: 45%
   }
   footer{
