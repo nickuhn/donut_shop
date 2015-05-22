@@ -100,6 +100,21 @@
     tableBuilder(open, close);
   };
 
+  var updateCreate = function() {
+    var locationFull = document.getElementById('location').value;
+    var missing = 0;
+    for (var i = 0; i < locationList.length; i++) {
+      if(locationList[i].locationName == locationFull) {
+        updateInfo();
+      } else {
+        missing ++;
+      }
+    }
+    if (missing == locationList.length) {
+      createNew();
+    }
+  };
+
   var createNew = function() {
     var locationFull = document.getElementById('location').value;
     var minCustPerHour = parseInt(document.getElementById('min-cust-hour').value);
@@ -110,11 +125,28 @@
     locationList[0].dailyDonuts(open, close);
     locationList[0].render();
   };
+
+  var updateInfo = function() {
+    var locationFull = document.getElementById('location').value;
+    var minCustPerHour = parseInt(document.getElementById('min-cust-hour').value);
+    var maxCustPerHour = parseInt(document.getElementById('max-cust-hour').value);
+    var donutPerCust = parseInt(document.getElementById('donut-cust').value);
+    for (var i = 0; i < locationList.length; i++) {
+      if(locationList[i].locationName == locationFull) {
+        locationList[i].minCustPerHour  = minCustPerHour;
+        locationList[i].maxCustPerHour  = maxCustPerHour;
+        locationList[i].avgDonutPerCust = donutPerCust;
+        locationList[i].locationName    = locationFull;
+        tableBuilder(open, close);
+      }
+    }
+  };
+
   hoursButton = document.getElementById('submit-hours');
   hoursButton.addEventListener('click', getHours, false);
 
   newStoreButton = document.getElementById('submit-new-store');
-  newStoreButton.addEventListener('click', createNew, false);
+  newStoreButton.addEventListener('click', updateCreate, false);
 
   //Initialize the table and instantiates 5 shop locations.
   locationList = [];
