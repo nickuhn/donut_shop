@@ -10,7 +10,7 @@
   </head>
   <body>
     <header>
-      <h1>Hourly Donut Demand Estimator</h1>
+      <h1 class="main-header">Hourly Donut Demand Estimator</h1>
       <form>
         <input id="min-cust-hour" type="number" placeholder="Min Cust Per Hour">
         <input id="max-cust-hour" type="number" placeholder="Max Cust Per Hour">
@@ -21,7 +21,7 @@
     </header>
     <main>
       <article class="table">
-        <h2>Donuts Needed for Each Hour</h2>
+        <h2 class="table-header">Donuts Needed for Each Hour</h2>
         <table id="main-table" class="main-table">
           <thead id="table-head" class="table-head">
           </thead>
@@ -29,7 +29,7 @@
           </tbody>
         </table>
         <form>
-          <h3>Input open and close times to update table.</h3>
+          <h3 class="hour-input-header">Input open and close times to update table.</h3>
           <label for="open">What time do you open?</label>
           <input id="open" type="number" placeholder="hour in 24H format">
           <label for="close">What time do you close?</label>

@@ -1,9 +1,4 @@
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
 body {
   font-family: 'Lato', sans-serif;
   background-color:#DDDCC5;
@@ -16,16 +11,16 @@ h1, h2, h3, th {
   font-family: 'Montserrat', sans-serif;
 }
 
-h1{
+.main-header{
   margin-top: auto;
   font-size: 2em
 }
 
-h2 {
+.table-header {
   margin-left: 20%;
 }
 
-h3 {
+.hour-input-header {
   margin-left: 17%;
 }
 
@@ -42,18 +37,23 @@ header {
   border-bottom-right-radius: 10px;
 }
 
-.table {
-  width: 75%;
-  margin: 0;
-  position: absolute;
-  top: 125px;
-}
-
 aside {
   width: 20%;
   position: relative;
   float: right;
   top: 150px;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.table {
+  width: 75%;
+  margin: 0;
+  position: absolute;
+  top: 125px;
 }
 
 .main-table {
@@ -77,11 +77,21 @@ aside {
   border-collapse: collapse;
 }
 
-.main-table td:hover {
+.main-table td:hover,
+.main-table td:focus {
   background-color: #611427;
   color: #DDDCC5;
   font-size: 2.5em;
   width: 50px;
+}
+
+tr:nth-child(odd) {
+  background-color: #DDDCC5;
+}
+
+.table-head tr {
+  background-color: #611427;
+  color: #DDDCC5;
 }
 
 input {
@@ -115,15 +125,6 @@ footer p {
   font-family: 'Kaushan Script', cursive;
 }
 
-tr:nth-child(odd) {
-  background-color: #DDDCC5;
-}
-
-.table-head tr {
-  background-color: #611427;
-  color: #DDDCC5;
-}
-
 footer {
   clear:both;
   position: absolute;
@@ -137,34 +138,43 @@ footer {
   header form input {
     display:inline-block;
   }
+
   header{
     position: static;
     width: auto;
   }
+
   .table {
     position: static;
     clear:both;
     display:inline-block;
   }
+
   main form {
     width: 45%;
     position: static;
     display: inline-block;
   }
+
   main form label, main form input {
     display: inline-block;
   }
+
   main form button {
     display: block;
     margin: auto;
   }
+
   aside {
     position: static;
     clear: both;
     display:inline-block;
-    width: 45%
+    width: 45%;
+    float: left;
   }
+
   footer{
     display:none;
   }
+
 }
