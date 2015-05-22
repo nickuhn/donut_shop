@@ -81,8 +81,9 @@ table {
 .main-table td:focus {
   background-color: #611427;
   color: #DDDCC5;
-  font-size: 2.5em;
-  width: 50px;
+  transform: scale(2.0);
+  -webkit-transform: scale(2.0);
+  -ms-transform: scale(2.0);
 }
 
 tr:nth-child(odd) {
@@ -112,10 +113,38 @@ button {
   font-family: 'Montserrat', sans-serif;
 }
 
-button:hover {
+@-webkit-keyframes wiggle {
+  from {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    -o-transform: rotate(5deg);
+  }
+}
+@keyframes wiggle {
+  from {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    -o-transform: rotate(5deg);
+  }
+}
+button:hover, button:focus {
   background-color: #611427;
   color: #DDDCC5;
+  -webkit-animation: wiggle .1s 5 ease;
+  -moz-animation: wiggle .1s 5 ease;
+  -o-animation: wiggle .1s 5 ease;
 }
+
 
 button:active {
   background-color: #1D2326;
